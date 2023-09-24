@@ -43,8 +43,13 @@ python main.py
 ```
 ### Authored by
 Valeria Gonzalez Segura 217441582 (INNI)
+
 Jonhathan Jacob Higuera Camacho 221351806 (INNI)
+
 Diego Tristán Domínguez Dueñas 217812629 (INNI)
+
 Minería de datos D01
+
 Profesor Israel Román Godínez
+
 2023B
