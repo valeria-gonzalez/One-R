@@ -5,7 +5,7 @@ Implementation of One Rule classification method on a set of random data.
 ### Installation
 ```
 pip install requirements.txt
-python main.py
+python main.py # will return output at output.txt
 ```
 
 ### Usage
