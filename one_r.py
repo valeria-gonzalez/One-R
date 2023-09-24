@@ -16,7 +16,7 @@ class OneR:
             test_percentage (float): percentage of the dataset to be used for testing
             
         Returns:
-            tuple (success_rate, model): Instance of OneR classifier
+            tuple (pair, dict): ((success_rate, failure_rate), model): Instance of OneR classifier
         
         """
         df = pd.read_csv(filepath) # read the dataset
@@ -36,7 +36,6 @@ class OneR:
         
         # get the amount of instances for the test set
         test_df = df_copy[:] if (test_percentage == 100) else df_copy[train_len:]
-        # print(f"Test dataset: \n\n{test_df}\n")
         
         print_to_file('w', {'Training dataset': train_df, 
                             'Test dataset': test_df}
@@ -102,14 +101,14 @@ class OneR:
             dict: frequency table of the attribute
         
         """
-        frequency_table = defaultdict(lambda: defaultdict(int))
-        paired_values = zip(attribute_values, class_values)
+        frequency_table = defaultdict(lambda: defaultdict(int)) # [attribute]: {class: frequency, total: #}
+        paired_values = zip(attribute_values, class_values) # pair the values {(attribute, class), (attribute, class), ...}
         
         for attribute_value, class_value in paired_values:
             # increment the frequency of the attribute value and class value
-            frequency_table[attribute_value][class_value] += 1 
+            frequency_table[attribute_value][class_value] += 1 # frequency_table[sunny][yes] += 1
             # record amount of instances of the attribute value
-            frequency_table[attribute_value]['Total'] += 1 
+            frequency_table[attribute_value]['Total'] += 1 # frequency[sunny][total] += 1
             
         return frequency_table
     
@@ -120,26 +119,31 @@ class OneR:
             frequency_table (dict): frequency table of the attribute
             
         Returns:
-            dict: rules for the attribute based on its frequency table
+            dict: rules for the attribute based on its frequency table 
+                  and its total error.
         
         """
-        attribute_rule = dict()
+        attribute_rule = dict() # dict = {[attribute]: class, [attribute]: class, ...}
         total_error_num = 0
         total_error_denom = 0
         
+        
+        # frequency_table = {[sunny]: {[yes] = #, [no] = #, [total] = #}, [overcast]: {...}}
         for attribute, class_dictionary in frequency_table.items():
             # get the total number of instances of the attribute and delete key
             total = class_dictionary.pop("Total", None) 
             total_error_denom += total # add to the total error denominator
             
-            # get the class value with the highest frequency
+            # get the class name with the highest frequency
             max_class = max(class_dictionary, key=class_dictionary.get)
             
             # create rule that determines class for the attribute
+            # attribute_rule = {[sunny]: yes, [overcast]: yes, ...}
             attribute_rule[attribute] = max_class 
             
             class_dictionary.pop(max_class, None) # delete key
             
+            # f.ex., si [sunny] = yes, el error es la suma de los no
             # add to total error numerator the sum of frequency of other class values
             total_error_num += sum(class_dictionary.values()) 
         
@@ -160,8 +164,8 @@ class OneR:
         
         """
         model_attribute = model['Attribute'] # get attribute name from the model
-        attribute_values = list(test_df[model_attribute]) # get the attribute values
-        class_values = list(test_df[class_name]) # get the class values
+        attribute_values = list(test_df[model_attribute]) # get the attribute values in train_df
+        class_values = list(test_df[class_name]) # get the class values in train_df
         # pair the values (attribute, class)
         paired_values = zip(attribute_values, class_values) 
         
@@ -170,7 +174,7 @@ class OneR:
         
         for attribute_value, class_value in paired_values:
             # get the predicted class value
-            predicted_class = model[attribute_value] 
+            predicted_class = model[attribute_value]  # model[sunny] = yes
             
             # compare the predicted class value with the actual class value
             if predicted_class == class_value:

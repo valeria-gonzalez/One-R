@@ -12,7 +12,7 @@ def main():
     
     one_r = OneR()
     
-    test_data, model = one_r.classify_data(
+    test_data, model = one_r.classify_data( # ((acierto, desacierto), dict)
         filepath, 
         class_name, 
         train_percentage, 
