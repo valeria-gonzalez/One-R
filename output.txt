@@ -1,0 +1,34 @@
+Training dataset: 
+
+    Outlook  Temp Humidity  Windy Play
+0  Overcast   Hot     High  False  Yes
+1     Rainy  Cool   Normal  False  Yes
+2     Sunny  Mild     High  False   No
+3     Rainy  Mild     High   True   No
+4     Sunny   Hot     High  False   No
+5     Rainy  Mild   Normal  False  Yes
+6     Sunny  Mild   Normal   True  Yes
+7     Sunny  Cool   Normal  False  Yes
+8     Rainy  Mild     High  False  Yes
+9     Sunny   Hot     High   True   No
+
+Test dataset: 
+
+     Outlook  Temp Humidity  Windy Play
+10  Overcast  Mild     High   True  Yes
+11  Overcast  Cool   Normal   True  Yes
+12  Overcast   Hot   Normal  False  Yes
+13     Rainy  Cool   Normal   True   No
+
+Success rate: 
+
+50.0
+
+Failure rate: 
+
+50.0
+
+Resulting model: 
+
+{'High': 'No', 'Normal': 'Yes', 'Total_error': 0.2, 'Attribute': 'Humidity'}
+
