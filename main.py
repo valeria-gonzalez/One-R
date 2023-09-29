@@ -9,8 +9,9 @@ def main():
     testNaiveBayes()
 
 def testNaiveBayes():
-    filepath = "data/golf-dataset-numerical.csv"
-    class_name = "Play"
+    # filepath = "data/golf-dataset-numerical.csv"
+    filepath = "data/flowers-dataset.csv"
+    class_name = "iris"
     train_percentage = 70
     test_percentage = 30
     

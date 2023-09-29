@@ -20,9 +20,9 @@ class NaiveBayes:
             tuple (pair, dict): ((success_rate, failure_rate), model): Instance of OneR classifier
         
         """
-        df = pd.read_csv(filepath) # read the dataset
+        df = pd.read_csv(filepath,sep="|") # read the dataset
         df_copy = df.copy() # create a copy of the dataset
-        df_copy = df_copy.sample(frac=1).reset_index(drop=True) # shuffle the dataset
+        # df_copy = df_copy.sample(frac=1).reset_index(drop=True) # shuffle the dataset
         
         # remove leading and trailing whitespaces from the dataset
         df_copy = df_copy.map(lambda x: x.strip() if isinstance(x, str) else x)
@@ -45,7 +45,7 @@ class NaiveBayes:
         print(f"Test dataset: \n\n{test_df}\n")
         
         model = self.get_model(train_df, class_name) # get the model
-        # success_rate = self.test_data(test_df, model, class_name) # test the dataset
+        success_rate = self.test_data(test_df, model, class_name) # test the dataset
         
         # return success_rate, model
         
@@ -60,6 +60,7 @@ class NaiveBayes:
             dict: model of the OneR classifier
         
         """
+        probabilities = {}
         rules = [] # list of dict of rules for each attribute
         INF = float('inf')
         best_rule = (INF, -1, "") # (min_tot_error, index in list, attribute_name)
@@ -83,21 +84,73 @@ class NaiveBayes:
                     frequency_table
                 )
                 
-                # get the rules for the attribute and the frequency table
-                attribute_rule = self.get_attribute_rule(frequency_table)
+                probabilities[attribute] = verosimilitude_table
+                # # get the rules for the attribute and the frequency table
+                # attribute_rule = self.get_attribute_rule(frequency_table)
                 
-                rules.append(attribute_rule) # append the rules to the list
+                # rules.append(attribute_rule) # append the rules to the list
                 
-                # update rule with the lowest total error
-                if attribute_rule['Total_error'] < best_rule[0]:
-                    best_rule = (attribute_rule['Total_error'], len(rules) - 1, attribute)
-                    
+                # # update rule with the lowest total error
+                # if attribute_rule['Total_error'] < best_rule[0]:
+                #     best_rule = (attribute_rule['Total_error'], len(rules) - 1, attribute)
+        
+        print("======")
+        probabilities[class_name] = self.get_probabilities_for_class(class_values)
+        # print(probabilities)
+        return probabilities
+        # probabilities_class = self.get_propabilities_class(probabilities, train_df, class_values)
+        exit()
         best_rule_index = best_rule[1] # get the index of the best rule
         model = rules[best_rule_index] # get the best dict rule
         model['Attribute'] = best_rule[2] # add the attribute name to the model
         
         return model
     
+    # def get_propabilities_class(self, probabilities, train_df, class_values):
+    #     """Get the probabilities for each class.
+        
+    #     Args:
+    #         probabilities (Dict): verosimilitude table of the attributes
+    #         class_values (string): name of the class column
+            
+    #     Returns:
+    #         dict: probabilities for each class
+        
+    #     """
+    #     probabilities_class = {}
+    #     print("+++++++")
+    #     unique_class_values = tuple(set(class_values))
+    #     probability = 0
+    #     for class_value in unique_class_values:
+    #         for attribute, attribute_values in probabilities.items():
+    #             for attribute_value, class_values in attribute_values.items():
+    #                 print(attribute_value, class_values)
+    #                 if attribute_value == class_value:
+    #                     probability += class_values
+    #     exit()
+
+        # class_values = list(train_df[class_name])
+
+
+    def get_probabilities_for_class(self, class_values):
+        """Get the probabilities for each class.
+        
+        Args:
+            probabilities (Dict): verosimilitude table of the attributes
+            class_values (string): name of the class column
+            
+        Returns:
+            dict: probabilities for each class
+        
+        """
+        probabilities_class = {}
+        unique_class_values = tuple(set(class_values))
+        for class_value in unique_class_values:
+            probabilities_class[class_value] = class_values.count(class_value) / len(class_values)
+        return probabilities_class
+
+   
+
     def get_frequency_table(self, attribute_values, class_values):
         """Get the frequency table of the attribute.
         
@@ -109,18 +162,18 @@ class NaiveBayes:
             dict: frequency table of the attribute
         
         """
-        if(isinstance(attribute_values[0], int)):
+        if type(attribute_values[0]) == int or type(attribute_values[0]) == float:
             return self.get_frecuency_table_numerical(attribute_values, class_values)
         
         frequency_table = defaultdict(lambda: defaultdict(int)) # [attribute]: {class: frequency, total: #}
+        frequency_table = self.sum_one_to_all(frequency_table, attribute_values, class_values)
         paired_values = zip(attribute_values, class_values) # pair the values {(attribute, class), (attribute, class), ...}
         
-
         for attribute_value, class_value in paired_values:
-            if(frequency_table[attribute_value][class_value] == 0):
-                frequency_table[attribute_value][class_value] += 1
-                # frequency_table[attribute_value]['Total'] += 1
-                frequency_table["Total"][class_value] += 1
+            # if(frequency_table[attribute_value][class_value] == 0):
+            #     frequency_table[attribute_value][class_value] += 1
+            #     # frequency_table[attribute_value]['Total'] += 1
+            #     frequency_table["Total"][class_value] += 1
             # increment the frequency of the attribute value and class value
             frequency_table[attribute_value][class_value] += 1 # frequency_table[sunny][yes] += 1
             # record amount of instances of the attribute value
@@ -129,6 +182,14 @@ class NaiveBayes:
         
         return frequency_table
     
+    def sum_one_to_all(self, frequency_table, attribute_values, class_values):
+        for attribute_value in tuple(set(attribute_values)):
+            for class_value in tuple(set(class_values)):
+                frequency_table[attribute_value][class_value] += 1
+                frequency_table["Total"][class_value] += 1
+        return frequency_table
+
+
     def get_frecuency_table_numerical(self, attribute_values, class_values):
         """Get the frequency table of the attribute.
         
@@ -165,13 +226,14 @@ class NaiveBayes:
 
         verosimilitude_table = defaultdict(lambda: defaultdict(float)) # [attribute]: {class: frequency/total}
         class_total = frequency_table.pop("Total", None)
+        print(']]]]]]]]]]]')
         print(frequency_table)
         for attribute, class_dictionary in frequency_table.items():
             print(attribute)
             print(class_dictionary)
             for clas, frequency in class_dictionary.items():
                 verosimilitude_table[attribute][clas] = frequency / class_total[clas]
-
+        
         return verosimilitude_table
 
     def get_verosimilitude_table_numerical(self, frequency_table):
@@ -240,15 +302,59 @@ class NaiveBayes:
             tuple (success_rate, failure_rate): success rate of the test set
         
         """
-        model_attribute = model['Attribute'] # get attribute name from the model
-        attribute_values = list(test_df[model_attribute]) # get the attribute values in train_df
+        # model_attribute = model['Attribute'] # get attribute name from the model
+        # attribute_values = list(test_df[model_attribute]) # get the attribute values in train_df
         class_values = list(test_df[class_name]) # get the class values in train_df
+        unique_class_values = tuple(set(class_values)) # get the unique class values
         # pair the values (attribute, class)
-        paired_values = zip(attribute_values, class_values) 
+        # paired_values = zip(attribute_values, class_values) 
         
         success_rate = 0 # number of correct predictions
         failure_rate = 0 # number of incorrect predictions
+
+        probabilities_class = {}
+        print("+++++++")
+        unique_class_values = tuple(set(class_values))
+        probability = 1
+        probability_dict = {}
+
+        print('-----------')
+        print(model)
+        for indice, instancia in test_df.iterrows():
+            probability_dict[indice] = {}
+            for class_value in unique_class_values:
+                probability_dict[indice][class_value] = 1
+                for attribute, attribute_values in model.items():
+                    if class_value in attribute_values:
+                        if attribute == class_name:
+                            probability_dict[indice][class_value] *= attribute_values[class_value]
+                        else:
+                            probability_dict[indice][class_value] *= self.get_density_function(instancia[attribute], attribute_values[class_value])
+
+                        # probability += attribute_values[class_value]
+                    else:
+                        probability_dict[indice][class_value] *= attribute_values[instancia[attribute]][class_value]
+                        
+                        # for attribute_value, class_values in attribute_values.items():
+                        #     print(attribute_value, class_values)
+                        #     exit()
+                        #     # if attribute_value == class_value:
+                        #     # probability_dict[indice][class_value] *= 
+                        #     #     probability += class_values
+                        
+                        # exit()
+            print(',,,,,,,,,,,,,,,,,,,,,')
+            print(probability_dict[indice])
+        exit()
+
+        for class_value in unique_class_values:
+            for attribute, attribute_values in model.items():
+                for attribute_value, class_values in attribute_values.items():
+                    print(attribute_value, class_values)
+                    if attribute_value == class_value:
+                        probability += class_values
         
+
         for attribute_value, class_value in paired_values:
             # get the predicted class value
             predicted_class = model[attribute_value]  # model[sunny] = yes
@@ -264,4 +370,18 @@ class NaiveBayes:
         failure_rate = (failure_rate * 100) / len_test_df # calculate failure rate
         
         return success_rate, failure_rate
+    
+    def get_density_function(self, attribute_value, mean_std_tuple):
+        """Get the density function of the attribute value.
         
+        Args:
+            attribute_value (int): attribute value
+            mean_std_tuple (dict): mean_std_tuple
+            
+        Returns:
+            float: density function of the attribute value
+        
+        """
+        mean, std = mean_std_tuple
+        exponent = np.exp(-((attribute_value-mean)**2 / (2*std**2)))
+        return (1 / (np.sqrt(2*np.pi) * std)) * exponent
