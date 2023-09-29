@@ -4,6 +4,7 @@
 from one_r import OneR
 from naive_bayes import NaiveBayes
 from file_mod import print_to_file
+import json
         
 def main():
     testNaiveBayes()
@@ -24,12 +25,12 @@ def testNaiveBayes():
         test_percentage
     )
     
-    # success_rate, failure_rate = test_data
+    success_rate, failure_rate = test_data
     
-    # print_to_file('a', {'Success rate': success_rate, 
-    #                     'Failure rate': failure_rate, 
-    #                     'Resulting model': model}
-    #               )
+    print_to_file('a', {'Success rate': success_rate, 
+                        'Failure rate': failure_rate, 
+                        'Resulting model': json.dumps(model, indent=4)}
+                  )
 
 
 def testOneR():

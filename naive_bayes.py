@@ -33,21 +33,21 @@ class NaiveBayes:
         train_len = round(df_len * (train_percentage / 100))
         
         train_df = df_copy[:train_len] # get the training set
-        # print(f"Training dataset: \n\n{train_df}\n")
+        print(f"Training dataset: \n\n{train_df}\n")
         
         # get the amount of instances for the test set
         test_df = df_copy[:] if (test_percentage == 100) else df_copy[train_len:]
         
-        # print_to_file('w', {'Training dataset': train_df, 
-        #                     'Test dataset': test_df}
-        #               )
+        print_to_file('w', {'Training dataset': train_df, 
+                            'Test dataset': test_df}
+                      )
         print(f"Training dataset: \n\n{train_df}\n")
         print(f"Test dataset: \n\n{test_df}\n")
         
         model = self.get_model(train_df, class_name) # get the model
         success_rate = self.test_data(test_df, model, class_name) # test the dataset
         
-        # return success_rate, model
+        return success_rate, model
         
     def get_model(self, train_df, class_name):
         """Get the model of the OneR classifier.
@@ -322,6 +322,7 @@ class NaiveBayes:
         print(model)
         for indice, instancia in test_df.iterrows():
             probability_dict[indice] = {}
+            probability_dict[indice]["Total"] = 0
             for class_value in unique_class_values:
                 probability_dict[indice][class_value] = 1
                 for attribute, attribute_values in model.items():
@@ -343,27 +344,38 @@ class NaiveBayes:
                         #     #     probability += class_values
                         
                         # exit()
-            print(',,,,,,,,,,,,,,,,,,,,,')
-            print(probability_dict[indice])
-        exit()
-
-        for class_value in unique_class_values:
-            for attribute, attribute_values in model.items():
-                for attribute_value, class_values in attribute_values.items():
-                    print(attribute_value, class_values)
-                    if attribute_value == class_value:
-                        probability += class_values
+                print(probability_dict[indice][class_value], "+")
+                probability_dict[indice]["Total"] += probability_dict[indice][class_value]
         
-
-        for attribute_value, class_value in paired_values:
-            # get the predicted class value
-            predicted_class = model[attribute_value]  # model[sunny] = yes
-            
-            # compare the predicted class value with the actual class value
-            if predicted_class == class_value:
+        print(probability_dict)
+        probability_dict_normalized = self.normalize_probability(probability_dict)
+        print('????????????????')
+        print(probability_dict_normalized)
+        for indice, instancia in test_df.iterrows():
+            max_probability = max(probability_dict_normalized[indice], key=probability_dict_normalized[indice].get)
+            if instancia[class_name] == max_probability:
                 success_rate += 1
             else:
                 failure_rate += 1
+
+        # exit()
+        # for class_value in unique_class_values:
+        #     for attribute, attribute_values in model.items():
+        #         for attribute_value, class_values in attribute_values.items():
+        #             print(attribute_value, class_values)
+        #             if attribute_value == class_value:
+        #                 probability += class_values
+        
+
+        # for attribute_value, class_value in paired_values:
+        #     # get the predicted class value
+        #     predicted_class = model[attribute_value]  # model[sunny] = yes
+            
+        #     # compare the predicted class value with the actual class value
+        #     if predicted_class == class_value:
+        #         success_rate += 1
+        #     else:
+        #         failure_rate += 1
                 
         len_test_df = len(test_df) # get the length of the test set
         success_rate = (success_rate * 100) / len_test_df # calculate success rate
@@ -371,6 +383,24 @@ class NaiveBayes:
         
         return success_rate, failure_rate
     
+    def normalize_probability(self, probability_dict):
+        """Normalize the probability of each class.
+        
+        Args:
+            probability_dict (dict): probability dictionary
+            
+        Returns:
+            dict: probability dictionary normalized
+        
+        """
+        probability_dict_normalized = {}
+        for indice, probability in probability_dict.items():
+            probability_dict_normalized[indice] = {}
+            for class_value, probability_value in probability.items():
+                if class_value != "Total":
+                    probability_dict_normalized[indice][class_value] = (probability_value / probability["Total"]) * 100
+        return probability_dict_normalized
+
     def get_density_function(self, attribute_value, mean_std_tuple):
         """Get the density function of the attribute value.
         
