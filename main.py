@@ -15,6 +15,7 @@ def testNaiveBayes():
     class_name = "iris"
     train_percentage = 70
     test_percentage = 30
+    separator = '|'
     
     naive_bayes = NaiveBayes()
     
@@ -22,7 +23,8 @@ def testNaiveBayes():
         filepath, 
         class_name, 
         train_percentage, 
-        test_percentage
+        test_percentage,
+        separator
     )
     
     success_rate, failure_rate = test_data

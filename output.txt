@@ -1,102 +1,102 @@
 Training dataset: 
 
    sepal length sepal width  petal length petal width             iris
-0           4.7      >= 3,2           1.3       < 0,8      Iris-setosa
-1           7.2      >= 3,2           6.0      >= 1,6   Iris-virginica
-2           5.7       < 2.8           3.5   0,8 - 1,6  Iris-versicolor
-3           5.0      >= 3,2           1.6       < 0,8      Iris-setosa
-4           4.4      >= 3,2           1.3       < 0,8      Iris-setosa
-5           7.0      >= 3,2           4.7   0,8 - 1,6  Iris-versicolor
-6           4.9   2.8 - 3,2           1.5       < 0,8      Iris-setosa
-7           5.8       < 2.8           4.0   0,8 - 1,6  Iris-versicolor
-8           6.2      >= 3,2           5.4      >= 1,6   Iris-virginica
-9           6.3      >= 3,2           6.0      >= 1,6   Iris-virginica
+0           5.7       < 2.8           3.5   0,8 - 1,6  Iris-versicolor
+1           4.9   2.8 - 3,2           1.5       < 0,8      Iris-setosa
+2           5.0      >= 3,2           1.6       < 0,8      Iris-setosa
+3           7.0      >= 3,2           4.7   0,8 - 1,6  Iris-versicolor
+4           5.8       < 2.8           4.0   0,8 - 1,6  Iris-versicolor
+5           6.3       < 2.8           4.9      >= 1,6   Iris-virginica
+6           6.0       < 2.8           5.0   0,8 - 1,6   Iris-virginica
+7           6.2      >= 3,2           5.4      >= 1,6   Iris-virginica
+8           7.2      >= 3,2           6.0      >= 1,6   Iris-virginica
+9           4.4      >= 3,2           1.3       < 0,8      Iris-setosa
 
 Test dataset: 
 
     sepal length sepal width  petal length petal width             iris
-10           5.0      >= 3,2           1.5       < 0,8      Iris-setosa
+10           4.7      >= 3,2           1.3       < 0,8      Iris-setosa
 11           5.6   2.8 - 3,2           4.5   0,8 - 1,6  Iris-versicolor
 12           5.5       < 2.8           4.4   0,8 - 1,6  Iris-versicolor
-13           6.0       < 2.8           5.0   0,8 - 1,6   Iris-virginica
-14           6.3       < 2.8           4.9      >= 1,6   Iris-virginica
+13           5.0      >= 3,2           1.5       < 0,8      Iris-setosa
+14           6.3      >= 3,2           6.0      >= 1,6   Iris-virginica
 
 Success rate: 
 
-60.0
+100.0
 
 Failure rate: 
 
-40.0
+0.0
 
 Resulting model: 
 
 {
     "sepal length": {
-        "Iris-setosa": [
-            4.75,
-            0.2291287847477919
-        ],
-        "Iris-virginica": [
-            6.566666666666666,
-            0.4496912521077348
-        ],
         "Iris-versicolor": [
             6.166666666666667,
             0.590668171555645
+        ],
+        "Iris-setosa": [
+            4.766666666666667,
+            0.26246692913372693
+        ],
+        "Iris-virginica": [
+            6.425,
+            0.4602988159880493
         ]
     },
     "sepal width": {
-        "2.8 - 3,2": {
-            "Iris-setosa": 0.2857142857142857,
-            "Iris-virginica": 0.16666666666666666,
-            "Iris-versicolor": 0.16666666666666666
-        },
         ">= 3,2": {
-            "Iris-setosa": 0.5714285714285714,
-            "Iris-virginica": 0.6666666666666666,
+            "Iris-setosa": 0.5,
+            "Iris-virginica": 0.42857142857142855,
             "Iris-versicolor": 0.3333333333333333
         },
+        "2.8 - 3,2": {
+            "Iris-setosa": 0.3333333333333333,
+            "Iris-virginica": 0.14285714285714285,
+            "Iris-versicolor": 0.16666666666666666
+        },
         "< 2.8": {
-            "Iris-setosa": 0.14285714285714285,
-            "Iris-virginica": 0.16666666666666666,
+            "Iris-setosa": 0.16666666666666666,
+            "Iris-virginica": 0.42857142857142855,
             "Iris-versicolor": 0.5
         }
     },
     "petal length": {
-        "Iris-setosa": [
-            1.425,
-            0.1299038105676658
-        ],
-        "Iris-virginica": [
-            5.8,
-            0.28284271247461884
-        ],
         "Iris-versicolor": [
             4.066666666666666,
             0.4921607686744468
+        ],
+        "Iris-setosa": [
+            1.4666666666666668,
+            0.12472191289246473
+        ],
+        "Iris-virginica": [
+            5.325,
+            0.4322904116447645
         ]
     },
     "petal width": {
         "0,8 - 1,6": {
-            "Iris-setosa": 0.14285714285714285,
-            "Iris-virginica": 0.16666666666666666,
+            "Iris-setosa": 0.16666666666666666,
+            "Iris-virginica": 0.2857142857142857,
             "Iris-versicolor": 0.6666666666666666
         },
-        "< 0,8": {
-            "Iris-setosa": 0.7142857142857143,
-            "Iris-virginica": 0.16666666666666666,
+        ">= 1,6": {
+            "Iris-setosa": 0.16666666666666666,
+            "Iris-virginica": 0.5714285714285714,
             "Iris-versicolor": 0.16666666666666666
         },
-        ">= 1,6": {
-            "Iris-setosa": 0.14285714285714285,
-            "Iris-virginica": 0.6666666666666666,
+        "< 0,8": {
+            "Iris-setosa": 0.6666666666666666,
+            "Iris-virginica": 0.14285714285714285,
             "Iris-versicolor": 0.16666666666666666
         }
     },
     "iris": {
-        "Iris-setosa": 0.4,
-        "Iris-virginica": 0.3,
+        "Iris-setosa": 0.3,
+        "Iris-virginica": 0.4,
         "Iris-versicolor": 0.3
     }
 }
