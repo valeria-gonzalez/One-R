@@ -66,27 +66,27 @@ import common_statistics as stats
 - Create frequency table of categorical values given a class
 
 ```
-freq_table = compute_freq_table_cat(train_df, class_name, attribute_name)
+freq_table = stats.compute_freq_table_cat(train_df, class_name, attribute_name)
 ```
 
 - Create a verisimilitude table for categorical values given a class
 ```
-verisimilitude_table = compute_versim_table_cat(freq_table)
+verisimilitude_table = stats.compute_versim_table_cat(freq_table)
 ```
 
 - Create verisimilitude table for numerical attributes
 ```
-verisimilitude_table = compute_versim_table_num(train_df, class_name, attribute_name)
+verisimilitude_table = stats.compute_versim_table_num(train_df, class_name, attribute_name)
 ```
 
 - Create frequency table for class values in the dataset
 ```
-frequency_table = compute_freq_table_class(train_df, class_name)
+frequency_table = stats.compute_freq_table_class(train_df, class_name)
 ```
 
 - Compute probability density function for a numerical attribute
 ```
-prob_density_function = compute_prob_density_func(attribute_value, class_mean, class_std)
+prob_density_function = stats.compute_prob_density_func(attribute_value, class_mean, class_std)
 ```
 
 ## Clean Data Module
@@ -99,12 +99,12 @@ import clean_data as cd
 ```
 - Read a dataset from csv file, shuffle its contents and strip spaces
 ```
-clean_df = process_data(filepath, separator)
+clean_df = cd.process_data(filepath, separator)
 ```
 - Divide dataset into training set and test set.
 
 ```
-train_df, test_df = divide_data(clean_df, train_percentage, test_percentage)
+train_df, test_df = cd.divide_data(clean_df, train_percentage, test_percentage)
 ```
 
 
