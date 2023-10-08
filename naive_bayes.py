@@ -35,7 +35,7 @@ class NaiveBayes:
             test_percentage (float): test data percentage
             
         Returns:
-            tuple(dataframe, dataframe): test dataset and normalized probabilities
+            dataframe: normalized probabilities
         """
         df = cd.process_data(self.filepath, self.separator)
         

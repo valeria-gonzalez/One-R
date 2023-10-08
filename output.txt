@@ -1,40 +1,25 @@
 Training dataset: 
 
-    sepal length sepal width  petal length petal width             iris
-0            6.3       < 2.8           4.9      >= 1,6   Iris-virginica
-1            6.3      >= 3,2           6.0      >= 1,6   Iris-virginica
-2            4.9   2.8 - 3,2           1.5       < 0,8      Iris-setosa
-3            5.5       < 2.8           4.4   0,8 - 1,6  Iris-versicolor
-4            5.0      >= 3,2           1.5       < 0,8      Iris-setosa
-5            5.6   2.8 - 3,2           4.5   0,8 - 1,6  Iris-versicolor
-6            4.4      >= 3,2           1.3       < 0,8      Iris-setosa
-7            5.0      >= 3,2           1.6       < 0,8      Iris-setosa
-8            6.0       < 2.8           5.0   0,8 - 1,6   Iris-virginica
-9            7.2      >= 3,2           6.0      >= 1,6   Iris-virginica
-10           4.7      >= 3,2           1.3       < 0,8      Iris-setosa
-11           7.0      >= 3,2           4.7   0,8 - 1,6  Iris-versicolor
-12           5.8       < 2.8           4.0   0,8 - 1,6  Iris-versicolor
-13           5.7       < 2.8           3.5   0,8 - 1,6  Iris-versicolor
-14           6.2      >= 3,2           5.4      >= 1,6   Iris-virginica
+   sepal length sepal width  petal length petal width             iris
+0           6.3      >= 3,2           6.0      >= 1,6   Iris-virginica
+1           6.2      >= 3,2           5.4      >= 1,6   Iris-virginica
+2           5.8       < 2.8           4.0   0,8 - 1,6  Iris-versicolor
+3           5.7       < 2.8           3.5   0,8 - 1,6  Iris-versicolor
+4           7.0      >= 3,2           4.7   0,8 - 1,6  Iris-versicolor
+5           4.4      >= 3,2           1.3       < 0,8      Iris-setosa
+6           6.0       < 2.8           5.0   0,8 - 1,6   Iris-virginica
+7           5.5       < 2.8           4.4   0,8 - 1,6  Iris-versicolor
+8           5.0      >= 3,2           1.6       < 0,8      Iris-setosa
+9           4.7      >= 3,2           1.3       < 0,8      Iris-setosa
 
 Test dataset: 
 
     sepal length sepal width  petal length petal width             iris
-0            6.3       < 2.8           4.9      >= 1,6   Iris-virginica
-1            6.3      >= 3,2           6.0      >= 1,6   Iris-virginica
-2            4.9   2.8 - 3,2           1.5       < 0,8      Iris-setosa
-3            5.5       < 2.8           4.4   0,8 - 1,6  Iris-versicolor
-4            5.0      >= 3,2           1.5       < 0,8      Iris-setosa
-5            5.6   2.8 - 3,2           4.5   0,8 - 1,6  Iris-versicolor
-6            4.4      >= 3,2           1.3       < 0,8      Iris-setosa
-7            5.0      >= 3,2           1.6       < 0,8      Iris-setosa
-8            6.0       < 2.8           5.0   0,8 - 1,6   Iris-virginica
-9            7.2      >= 3,2           6.0      >= 1,6   Iris-virginica
-10           4.7      >= 3,2           1.3       < 0,8      Iris-setosa
-11           7.0      >= 3,2           4.7   0,8 - 1,6  Iris-versicolor
-12           5.8       < 2.8           4.0   0,8 - 1,6  Iris-versicolor
-13           5.7       < 2.8           3.5   0,8 - 1,6  Iris-versicolor
-14           6.2      >= 3,2           5.4      >= 1,6   Iris-virginica
+10           5.0      >= 3,2           1.5       < 0,8      Iris-setosa
+11           5.6   2.8 - 3,2           4.5   0,8 - 1,6  Iris-versicolor
+12           4.9   2.8 - 3,2           1.5       < 0,8      Iris-setosa
+13           7.2      >= 3,2           6.0      >= 1,6   Iris-virginica
+14           6.3       < 2.8           4.9      >= 1,6   Iris-virginica
 
 attribute num: 
 
@@ -42,11 +27,11 @@ sepal length
 
 verosim: 
 
-                 mean       std
-iris                           
-Iris-setosa      4.80  0.254951
-Iris-versicolor  5.92  0.614003
-Iris-virginica   6.40  0.463681
+                     mean       std
+iris                               
+Iris-setosa      4.700000  0.300000
+Iris-versicolor  6.000000  0.678233
+Iris-virginica   6.166667  0.152753
 
 attribute cat: 
 
@@ -54,19 +39,19 @@ sepal width
 
 freq: 
 
-sepal width      2.8 - 3,2  < 2.8  >= 3,2
-iris                                     
-Iris-setosa              2      1       5
-Iris-versicolor          2      4       2
-Iris-virginica           1      3       4
+sepal width      < 2.8  >= 3,2
+iris                          
+Iris-setosa          1       4
+Iris-versicolor      4       2
+Iris-virginica       2       3
 
 verosim: 
 
-sepal width      2.8 - 3,2  < 2.8  >= 3,2
-iris                                     
-Iris-setosa          0.250  0.125   0.625
-Iris-versicolor      0.250  0.500   0.250
-Iris-virginica       0.125  0.375   0.500
+sepal width         < 2.8    >= 3,2
+iris                               
+Iris-setosa      0.200000  0.800000
+Iris-versicolor  0.666667  0.333333
+Iris-virginica   0.400000  0.600000
 
 attribute num: 
 
@@ -74,11 +59,11 @@ petal length
 
 verosim: 
 
-                 mean       std
-iris                           
-Iris-setosa      1.44  0.134164
-Iris-versicolor  4.22  0.476445
-Iris-virginica   5.46  0.527257
+                     mean       std
+iris                               
+Iris-setosa      1.400000  0.173205
+Iris-versicolor  4.150000  0.519615
+Iris-virginica   5.466667  0.503322
 
 attribute cat: 
 
@@ -88,17 +73,17 @@ freq:
 
 petal width      0,8 - 1,6  < 0,8  >= 1,6
 iris                                     
-Iris-setosa              1      6       1
-Iris-versicolor          6      1       1
-Iris-virginica           2      1       5
+Iris-setosa              1      4       1
+Iris-versicolor          5      1       1
+Iris-virginica           2      1       3
 
 verosim: 
 
-petal width      0,8 - 1,6  < 0,8  >= 1,6
-iris                                     
-Iris-setosa          0.125  0.750   0.125
-Iris-versicolor      0.750  0.125   0.125
-Iris-virginica       0.250  0.125   0.625
+petal width      0,8 - 1,6     < 0,8    >= 1,6
+iris                                          
+Iris-setosa       0.166667  0.666667  0.166667
+Iris-versicolor   0.714286  0.142857  0.142857
+Iris-virginica    0.333333  0.166667  0.500000
 
 class: 
 
@@ -107,73 +92,43 @@ iris
 freq: 
 
 iris
-Iris-virginica     0.333333
-Iris-setosa        0.333333
-Iris-versicolor    0.333333
+Iris-versicolor    0.4
+Iris-virginica     0.3
+Iris-setosa        0.3
 Name: count, dtype: float64
 
 Calculo de probabilidad por clase: 
 
-    Iris-virginica    Iris-setosa  Iris-versicolor
-0     2.826924e-02  2.789803e-154     3.379814e-03
-1     3.921364e-02  5.227186e-260     4.358275e-06
-2     1.020533e-17   2.436523e-01     1.193520e-10
-3     4.099106e-04  1.121615e-109     5.011280e-02
-4     8.012783e-17   4.836027e-01     1.543730e-10
-5     2.917756e-04  3.867195e-117     2.497689e-02
-6     3.757463e-20   1.231918e-01     1.846230e-12
-7     3.270451e-16   2.624741e-01     5.004879e-10
-8     9.584042e-03  4.817479e-160     1.765498e-02
-9     9.060355e-03  9.824647e-272     6.008825e-07
-10    4.965700e-19   3.905627e-01     5.492214e-12
-11    4.155330e-03  5.078340e-146     4.357980e-03
-12    1.904712e-04   9.611729e-85     5.997263e-02
-13    6.498919e-06   3.053296e-56     2.035961e-02
-14    6.138974e-02  2.274548e-197     2.378176e-04
+      Iris-setosa  Iris-versicolor  Iris-virginica
+10   2.516104e-01     6.526824e-09    4.357581e-28
+11   4.691196e-73     8.642538e-02    3.362462e-05
+12   4.152178e-01     1.558442e-08    3.949651e-30
+13  7.036253e-170     3.179014e-06    1.228407e-11
+14   4.375714e-97     5.504966e-03    4.502437e-02
 
 Calculo de probabilidad por clase normalizado: 
 
-    Iris-virginica  Iris-setosa  Iris-versicolor
-0            89.32          0.0            10.68
-1            99.99          0.0             0.01
-2             0.00        100.0             0.00
-3             0.81          0.0            99.19
-4             0.00        100.0             0.00
-5             1.15          0.0            98.85
-6             0.00        100.0             0.00
-7             0.00        100.0             0.00
-8            35.18          0.0            64.82
-9            99.99          0.0             0.01
-10            0.00        100.0             0.00
-11           48.81          0.0            51.19
-12            0.32          0.0            99.68
-13            0.03          0.0            99.97
-14           99.61          0.0             0.39
+    Iris-setosa  Iris-versicolor  Iris-virginica
+10        100.0             0.00            0.00
+11          0.0            99.96            0.04
+12        100.0             0.00            0.00
+13          0.0           100.00            0.00
+14          0.0            10.89           89.11
 
 Evaluacion final: 
 
                real        predicted  correct
-0    Iris-virginica   Iris-virginica     True
-1    Iris-virginica   Iris-virginica     True
-2       Iris-setosa      Iris-setosa     True
-3   Iris-versicolor  Iris-versicolor     True
-4       Iris-setosa      Iris-setosa     True
-5   Iris-versicolor  Iris-versicolor     True
-6       Iris-setosa      Iris-setosa     True
-7       Iris-setosa      Iris-setosa     True
-8    Iris-virginica  Iris-versicolor    False
-9    Iris-virginica   Iris-virginica     True
 10      Iris-setosa      Iris-setosa     True
 11  Iris-versicolor  Iris-versicolor     True
-12  Iris-versicolor  Iris-versicolor     True
-13  Iris-versicolor  Iris-versicolor     True
+12      Iris-setosa      Iris-setosa     True
+13   Iris-virginica  Iris-versicolor    False
 14   Iris-virginica   Iris-virginica     True
 
 success: 
 
-93.33333333333333
+80.0
 
 failure: 
 
-6.666666666666671
+20.0
 

@@ -1,16 +1,6 @@
 real,predicted
-Iris-virginica,Iris-virginica
-Iris-virginica,Iris-virginica
 Iris-setosa,Iris-setosa
 Iris-versicolor,Iris-versicolor
-Iris-setosa,Iris-setosa
-Iris-versicolor,Iris-versicolor
-Iris-setosa,Iris-setosa
 Iris-setosa,Iris-setosa
 Iris-virginica,Iris-versicolor
-Iris-virginica,Iris-virginica
-Iris-setosa,Iris-setosa
-Iris-versicolor,Iris-versicolor
-Iris-versicolor,Iris-versicolor
-Iris-versicolor,Iris-versicolor
 Iris-virginica,Iris-virginica
