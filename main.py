@@ -3,7 +3,6 @@
 # local imports
 # from naive_bayes import NaiveBayes
 from file_mod import print_to_file
-import json
 from naive_bayes import NaiveBayes
         
 def main():
@@ -16,17 +15,22 @@ def testNaiveBayes():
     test_percentage = 30
     separator = '|'
     
-    naive_bayes = NaiveBayes()
+    # create naive bayes classifier
+    naive_bayes = NaiveBayes(class_name, filepath, separator)
     
-    test_df, model = naive_bayes.fit( 
-        filepath, 
-        class_name, 
+    # fit the model
+    model = naive_bayes.fit( 
         train_percentage, 
-        test_percentage,
-        separator
+        test_percentage
     )
     
-    results_df, success, failure = naive_bayes.evaluate(test_df, model, class_name)
+    print_to_file('a', {'Calculo de probabilidad por clase normalizado': model})
+    
+    # evaluate the model
+    results_df, success, failure = naive_bayes.evaluate()
+    print_to_file('a', {'Evaluacion final': results_df, 'success' : success, 'failure' : failure})
+    
+    # save results to csv
     results_df[['real', 'predicted']].to_csv('results.csv', index = False)
 
 if __name__ == '__main__':
