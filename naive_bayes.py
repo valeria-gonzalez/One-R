@@ -60,7 +60,7 @@ class NaiveBayes:
             class_name (string): name of the class column
             
         Returns:
-            dict: model of the Naive Bayes classifier
+            dict: versimilitude table of the data set
         """
         verisimilitude_table = defaultdict(dict)
         
@@ -180,3 +180,12 @@ class NaiveBayes:
         failure = 100.0 - success
         
         return results_df, success, failure 
+    
+    def results_csv(self, results_df):
+        """Save the results dataframe to a csv file.
+            Creates a csv file with the real class and the predicted class.
+
+        Args:
+            results_df (dataframe): resulting dataframe of the evaluation
+        """
+        results_df[['real', 'predicted']].to_csv('results.csv', index = False)

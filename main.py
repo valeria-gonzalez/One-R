@@ -31,7 +31,7 @@ def testNaiveBayes():
     print_to_file('a', {'Evaluacion final': results_df, 'success' : success, 'failure' : failure})
     
     # save results to csv
-    results_df[['real', 'predicted']].to_csv('results.csv', index = False)
+    naive_bayes.results_csv(results_df)
 
 if __name__ == '__main__':
     main()
