@@ -1,16 +1,15 @@
 # standard library imports
 # third-party imports
 # local imports
-from one_r import OneR
-from naive_bayes import NaiveBayes
+# from naive_bayes import NaiveBayes
 from file_mod import print_to_file
 import json
+from naive_bayes import NaiveBayes
         
 def main():
     testNaiveBayes()
 
 def testNaiveBayes():
-    # filepath = "data/golf-dataset-numerical.csv"
     filepath = "data/flowers-dataset.csv"
     class_name = "iris"
     train_percentage = 70
@@ -19,7 +18,7 @@ def testNaiveBayes():
     
     naive_bayes = NaiveBayes()
     
-    test_data, model = naive_bayes.classify_data( # ((acierto, desacierto), dict)
+    test_df, model = naive_bayes.fit( 
         filepath, 
         class_name, 
         train_percentage, 
@@ -27,35 +26,8 @@ def testNaiveBayes():
         separator
     )
     
-    success_rate, failure_rate = test_data
-    
-    print_to_file('a', {'Success rate': success_rate, 
-                        'Failure rate': failure_rate, 
-                        'Resulting model': json.dumps(model, indent=4)}
-                  )
-
-
-def testOneR():
-    filepath = "data/golf-dataset-categorical.csv"
-    class_name = "Play"
-    train_percentage = 70
-    test_percentage = 30
-    
-    one_r = OneR()
-    
-    test_data, model = one_r.classify_data( # ((acierto, desacierto), dict)
-        filepath, 
-        class_name, 
-        train_percentage, 
-        test_percentage
-    )
-    
-    success_rate, failure_rate = test_data
-    
-    print_to_file('a', {'Success rate': success_rate, 
-                        'Failure rate': failure_rate, 
-                        'Resulting model': model}
-                  )
+    results_df, success, failure = naive_bayes.evaluate(test_df, model, class_name)
+    results_df[['real', 'predicted']].to_csv('results.csv', index = False)
 
 if __name__ == '__main__':
     main()

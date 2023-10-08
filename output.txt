@@ -1,103 +1,134 @@
 Training dataset: 
 
    sepal length sepal width  petal length petal width             iris
-0           5.7       < 2.8           3.5   0,8 - 1,6  Iris-versicolor
-1           4.9   2.8 - 3,2           1.5       < 0,8      Iris-setosa
-2           5.0      >= 3,2           1.6       < 0,8      Iris-setosa
-3           7.0      >= 3,2           4.7   0,8 - 1,6  Iris-versicolor
-4           5.8       < 2.8           4.0   0,8 - 1,6  Iris-versicolor
-5           6.3       < 2.8           4.9      >= 1,6   Iris-virginica
-6           6.0       < 2.8           5.0   0,8 - 1,6   Iris-virginica
-7           6.2      >= 3,2           5.4      >= 1,6   Iris-virginica
-8           7.2      >= 3,2           6.0      >= 1,6   Iris-virginica
-9           4.4      >= 3,2           1.3       < 0,8      Iris-setosa
+0           7.0      >= 3,2           4.7   0,8 - 1,6  Iris-versicolor
+1           5.8       < 2.8           4.0   0,8 - 1,6  Iris-versicolor
+2           7.2      >= 3,2           6.0      >= 1,6   Iris-virginica
+3           5.7       < 2.8           3.5   0,8 - 1,6  Iris-versicolor
+4           4.7      >= 3,2           1.3       < 0,8      Iris-setosa
+5           5.0      >= 3,2           1.5       < 0,8      Iris-setosa
+6           4.4      >= 3,2           1.3       < 0,8      Iris-setosa
+7           6.3       < 2.8           4.9      >= 1,6   Iris-virginica
+8           6.2      >= 3,2           5.4      >= 1,6   Iris-virginica
+9           5.0      >= 3,2           1.6       < 0,8      Iris-setosa
 
 Test dataset: 
 
     sepal length sepal width  petal length petal width             iris
-10           4.7      >= 3,2           1.3       < 0,8      Iris-setosa
-11           5.6   2.8 - 3,2           4.5   0,8 - 1,6  Iris-versicolor
-12           5.5       < 2.8           4.4   0,8 - 1,6  Iris-versicolor
-13           5.0      >= 3,2           1.5       < 0,8      Iris-setosa
-14           6.3      >= 3,2           6.0      >= 1,6   Iris-virginica
+10           4.9   2.8 - 3,2           1.5       < 0,8      Iris-setosa
+11           6.0       < 2.8           5.0   0,8 - 1,6   Iris-virginica
+12           5.6   2.8 - 3,2           4.5   0,8 - 1,6  Iris-versicolor
+13           6.3      >= 3,2           6.0      >= 1,6   Iris-virginica
+14           5.5       < 2.8           4.4   0,8 - 1,6  Iris-versicolor
 
-Success rate: 
+attribute: 
 
-100.0
+sepal length
 
-Failure rate: 
+verosim: 
 
-0.0
+                     mean       std
+iris                               
+Iris-setosa      4.775000  0.287228
+Iris-versicolor  6.166667  0.723418
+Iris-virginica   6.566667  0.550757
 
-Resulting model: 
+attribute: 
 
-{
-    "sepal length": {
-        "Iris-versicolor": [
-            6.166666666666667,
-            0.590668171555645
-        ],
-        "Iris-setosa": [
-            4.766666666666667,
-            0.26246692913372693
-        ],
-        "Iris-virginica": [
-            6.425,
-            0.4602988159880493
-        ]
-    },
-    "sepal width": {
-        ">= 3,2": {
-            "Iris-setosa": 0.5,
-            "Iris-virginica": 0.42857142857142855,
-            "Iris-versicolor": 0.3333333333333333
-        },
-        "2.8 - 3,2": {
-            "Iris-setosa": 0.3333333333333333,
-            "Iris-virginica": 0.14285714285714285,
-            "Iris-versicolor": 0.16666666666666666
-        },
-        "< 2.8": {
-            "Iris-setosa": 0.16666666666666666,
-            "Iris-virginica": 0.42857142857142855,
-            "Iris-versicolor": 0.5
-        }
-    },
-    "petal length": {
-        "Iris-versicolor": [
-            4.066666666666666,
-            0.4921607686744468
-        ],
-        "Iris-setosa": [
-            1.4666666666666668,
-            0.12472191289246473
-        ],
-        "Iris-virginica": [
-            5.325,
-            0.4322904116447645
-        ]
-    },
-    "petal width": {
-        "0,8 - 1,6": {
-            "Iris-setosa": 0.16666666666666666,
-            "Iris-virginica": 0.2857142857142857,
-            "Iris-versicolor": 0.6666666666666666
-        },
-        ">= 1,6": {
-            "Iris-setosa": 0.16666666666666666,
-            "Iris-virginica": 0.5714285714285714,
-            "Iris-versicolor": 0.16666666666666666
-        },
-        "< 0,8": {
-            "Iris-setosa": 0.6666666666666666,
-            "Iris-virginica": 0.14285714285714285,
-            "Iris-versicolor": 0.16666666666666666
-        }
-    },
-    "iris": {
-        "Iris-setosa": 0.3,
-        "Iris-virginica": 0.4,
-        "Iris-versicolor": 0.3
-    }
-}
+sepal width
+
+freq: 
+
+sepal width      < 2.8  >= 3,2
+iris                          
+Iris-setosa          1       5
+Iris-versicolor      3       2
+Iris-virginica       2       3
+
+verosim: 
+
+sepal width         < 2.8    >= 3,2
+iris                               
+Iris-setosa      0.166667  0.833333
+Iris-versicolor  0.600000  0.400000
+Iris-virginica   0.400000  0.600000
+
+attribute: 
+
+petal length
+
+verosim: 
+
+                     mean       std
+iris                               
+Iris-setosa      1.425000  0.150000
+Iris-versicolor  4.066667  0.602771
+Iris-virginica   5.433333  0.550757
+
+attribute: 
+
+petal width
+
+freq: 
+
+petal width      0,8 - 1,6  < 0,8  >= 1,6
+iris                                     
+Iris-setosa              1      5       1
+Iris-versicolor          4      1       1
+Iris-virginica           1      1       4
+
+verosim: 
+
+petal width      0,8 - 1,6     < 0,8    >= 1,6
+iris                                          
+Iris-setosa       0.142857  0.714286  0.142857
+Iris-versicolor   0.666667  0.166667  0.166667
+Iris-virginica    0.166667  0.166667  0.666667
+
+class: 
+
+iris
+
+freq: 
+
+iris
+Iris-setosa        0.4
+Iris-versicolor    0.3
+Iris-virginica     0.3
+Name: count, dtype: float64
+
+Calculo de probabilidad por clase: 
+
+      Iris-setosa  Iris-virginica  Iris-versicolor
+10   8.472677e-01    2.264840e-15     4.553126e-07
+11  1.781850e-129    4.535568e-03     1.286209e-02
+12   1.891782e-94    1.337602e-03     4.148044e-02
+13  1.326822e-209    3.298383e-02     4.188300e-05
+14   5.565978e-89    2.767189e-04     2.458328e-02
+
+Calculo de probabilidad por clase normalizado: 
+
+    Iris-setosa  Iris-virginica  Iris-versicolor
+10        100.0            0.00             0.00
+11          0.0           26.07            73.93
+12          0.0            3.12            96.88
+13          0.0           99.87             0.13
+14          0.0            1.11            98.89
+
+Evaluacion final: 
+
+               real        predicted  correct
+10      Iris-setosa      Iris-setosa     True
+11   Iris-virginica  Iris-versicolor    False
+12  Iris-versicolor  Iris-versicolor     True
+13   Iris-virginica   Iris-virginica     True
+14  Iris-versicolor  Iris-versicolor     True
+
+success: 
+
+80.0
+
+failure: 
+
+20.0
 
