@@ -4,7 +4,8 @@
 # from naive_bayes import NaiveBayes
 from file_mod import print_to_file
 from naive_bayes import NaiveBayes
-        
+from matrix import Matrix
+
 def main():
     testNaiveBayes()
 
@@ -32,6 +33,7 @@ def testNaiveBayes():
     
     # save results to csv
     naive_bayes.results_csv(results_df)
+    Matrix()
 
 if __name__ == '__main__':
     main()
